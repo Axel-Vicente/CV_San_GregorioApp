@@ -37,16 +37,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() => _loading = true);
 
     try {
-      print('aaa ${emailController.text}');
-      print('aaa ${emailController.value}');
-      print('aa ${passwordController.text}');
-      print('a ${passwordController.value}');
-      final credential = await authService.registerWithEmail(
+      await authService.registerWithEmail(
         emailController.text.trim(),
         passwordController.text.trim(),
       );
-      print('✅ Usuario registrado: ${credential.user?.uid}');
-
+      
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const RegisterSuccessScreen()),
