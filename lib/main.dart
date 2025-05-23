@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:volley_tracker/views/home_screen.dart';
+import 'package:volley_tracker/views/register_success_screen.dart';
+import 'package:volley_tracker/widgets/AuthGate.dart';
 import 'core/firebase_options.dart';
-import 'views/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,12 +13,9 @@ void main() async {
   runApp(MyApp());
 }
 
-
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,10 +23,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 179, 17, 17)),
       ),
-      initialRoute: '/',
+      home: AuthGate(),
       routes: {
-        '/': (context) => const LoginScreen()
-        //'/home': (context) => const Placeholder(), // Sustituir por HomeScreen
+        '/register_success': (context) => const RegisterSuccessScreen(),
+        '/home': (context) => const HomeScreen(),
       },
     );
   }

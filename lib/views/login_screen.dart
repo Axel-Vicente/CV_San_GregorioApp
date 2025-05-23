@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'register_screen.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,7 +14,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
 
   bool _loading = false;
@@ -54,20 +55,23 @@ class _LoginScreenState extends State<LoginScreen> {
       _loading = true;
       _error = null;
     });
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
 
-    final user = await _authService.loginWithEmail(
-      _emailController.text.trim(),
-      _passwordController.text.trim(),
-    );
-
-    setState(() => _loading = false);
-
-    if (user != null) {
-      Navigator.pushReplacementNamed(context, '/home');
-    } else {
+      // Navegar a la pantalla principal si el login fue exitoso
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
       setState(() {
-        _error = "Usuario o contraseña incorrectos.";
+        _error = e.message;
       });
+    } finally {
+      setState(() => _loading = false);
     }
   }
 
