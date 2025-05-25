@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:volley_tracker/views/home_screen.dart';
 import 'package:volley_tracker/views/register_success_screen.dart';
 import 'package:volley_tracker/widgets/AuthGate.dart';
+import 'package:volley_tracker/widgets/SGTheme.dart';
 import 'core/firebase_options.dart';
 
 void main() async {
@@ -20,9 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CV San Gregorio App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 179, 17, 17)),
-      ),
+      theme: appTheme,
       home: AuthGate(),
       routes: {
         '/register_success': (context) => const RegisterSuccessScreen(),
