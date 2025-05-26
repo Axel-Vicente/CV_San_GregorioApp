@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData appTheme = ThemeData(
   brightness: Brightness.dark,
-  fontFamily: 'sgFont',
+  textTheme: GoogleFonts.interTextTheme(),
   colorScheme: ColorScheme.dark(
     primary: Colors.grey[800]!, // color para widgets
     secondary: Colors.red,      // rojo como color de acento
