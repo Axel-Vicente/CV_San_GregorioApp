@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:volley_tracker/views/training_screen.dart';
 import 'package:volley_tracker/views/stats_screen.dart';
 
@@ -44,20 +43,20 @@ class _MainNavigationScreen extends State<MainNavigationScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Icon(LucideIcons.home, color: _selectedIndex == 0 ? Colors.red : Colors.white70),
+                icon: Icon(Icons.home_rounded, color: _selectedIndex == 0 ? Colors.red : Colors.white70),
                 onPressed: () => _onItemTapped(0),
               ),
               IconButton(
-                icon: Icon(LucideIcons.barChart3, color: _selectedIndex == 1 ? Colors.red : Colors.white70),
+                icon: Icon(Icons.bar_chart_rounded, color: _selectedIndex == 1 ? Colors.red : Colors.white70),
                 onPressed: () => _onItemTapped(1),
               ),
               const SizedBox(width: 48), // espacio para el FAB
               IconButton(
-                icon: Icon(LucideIcons.dumbbell, color: _selectedIndex == 2 ? Colors.red : Colors.white70),
+                icon: Icon(Icons.sports_volleyball_rounded, color: _selectedIndex == 2 ? Colors.red : Colors.white70),
                 onPressed: () => _onItemTapped(2),
               ),
               IconButton(
-                icon: Icon(LucideIcons.settings, color: Colors.white70),
+                icon: Icon(Icons.settings, color: Colors.white70),
                 onPressed: () {},
               ),
             ],
