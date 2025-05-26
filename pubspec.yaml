@@ -68,6 +68,7 @@ flutter:
   # the material Icons class.
   assets:
     - lib/assets/images/app_icon.png
+    - lib/assets/images/warmup.jpg
   fonts:
     - family: sgFont
       fonts:
