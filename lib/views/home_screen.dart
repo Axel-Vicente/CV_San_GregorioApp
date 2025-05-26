@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:volley_tracker/models/player.dart';
+import 'package:volley_tracker/views/player_profile_screen.dart';
 import 'package:volley_tracker/views/training_screen.dart';
 import 'package:volley_tracker/views/stats_screen.dart';
 
@@ -27,7 +31,26 @@ class _MainNavigationScreen extends State<MainNavigationScreen> {
     return Scaffold(
       body: _screens[_selectedIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          final uid = FirebaseAuth.instance.currentUser?.uid;
+          if (uid == null) return;
+
+          final doc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+          if (!doc.exists) return;
+
+          final player = Player.fromFirestore(doc);
+          final isCoach = player.rol == "coach" ? true : false;
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PlayerProfileScreen(
+                player: player,
+                isTrainer: isCoach,
+              ),
+            ),
+          );
+        },
         backgroundColor: Colors.red,
         shape: const CircleBorder(),
         child: const Icon(Icons.person, color: Colors.white),

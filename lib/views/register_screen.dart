@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:volley_tracker/widgets/createUserProfile.dart';
 import '../services/auth_service.dart';
 import 'register_success_screen.dart';
 
@@ -11,6 +12,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final authService = AuthService();
@@ -39,6 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         emailController.text.trim(),
         passwordController.text.trim(),
       );
+      await createUserProfile(nameController.text.trim());
       
       Navigator.pushReplacement(
         context,
@@ -65,6 +68,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           key: _formKey,
           child: Column(
             children: [
+              TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(labelText: "Nombre"),
+                keyboardType: TextInputType.text,
+              ),
               TextFormField(
                 controller: emailController,
                 decoration: const InputDecoration(labelText: "Email"),
