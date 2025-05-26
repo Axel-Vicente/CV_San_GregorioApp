@@ -15,45 +15,74 @@ class PlayerProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: Text("Bienvenido ${player.nombre}!"),
-        backgroundColor: Colors.grey[800]!,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            CircleAvatar(
-              backgroundImage: null,//NetworkImage(player.imagenPerfil),
-              radius: 50,
+      body: Column(
+        children: [
+          // Header
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
             ),
-            const SizedBox(height: 16),
-            Text(
-              player.nombre,
-              style: const TextStyle(color: Colors.white, fontSize: 22),
-            ),
-            const SizedBox(height: 8),
-            InfoRow(label: "Edad", value: "{player.edad}"),
-            InfoRow(label: "Altura", value: "{player.altura}"),
-            InfoRow(label: "Posición", value: "player.posicion"),
-            const SizedBox(height: 20),
-            if (isTrainer)
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/editarPerfil',
-                    arguments: player,
-                  );
-                },
-                icon: const Icon(Icons.edit),
-                label: const Text("Editar Perfil"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                ),
+            child: Container(
+              color: Colors.grey[900],
+              padding: const EdgeInsets.only(top: 30, bottom: 20, left: 20, right: 20),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: null, // NetworkImage(player.imagenPerfil),
+                    radius: 35,
+                    backgroundColor: Colors.grey[800],
+                    child: const Icon(Icons.person, color: Colors.red, size: 50),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      "Bienvenido ${player.nombre}!",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 2,
+                    ),
+                  ),
+                ],
               ),
-          ],
-        ),
+            ),
+          ),
+
+          // Contenido del perfil
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  const SizedBox(height: 16),
+                  InfoRow(label: "Edad", value: "{player}"),
+                  InfoRow(label: "Altura", value: "{player.altura}"),
+                  InfoRow(label: "Posición", value: "player.posicion"),
+                  const SizedBox(height: 20),
+                  if (isTrainer)
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/editarPerfil',
+                          arguments: player,
+                        );
+                      },
+                      icon: const Icon(Icons.edit),
+                      label: const Text("Editar Perfil"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

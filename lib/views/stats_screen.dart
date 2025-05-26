@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-class StatsScreen extends StatefulWidget {
+class StatsScreen extends StatelessWidget {
   const StatsScreen({super.key});
   
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
+  Widget build(BuildContext context) => const Center(child: Text("Stats"));
 }

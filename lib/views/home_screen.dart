@@ -15,12 +15,25 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreen extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
+  Player? _player;
 
-  final List<Widget> _screens = [
-    const HomeScreen(),
-    const StatsScreen(),
-    const TrainingScreen(),
-  ];
+@override
+  void initState() {
+    super.initState();
+    _loadPlayer();
+  }
+
+  Future<void> _loadPlayer() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
+    final doc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    if (!doc.exists) return;
+
+    setState(() {
+      _player = Player.fromFirestore(doc);
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() => _selectedIndex = index);
@@ -28,34 +41,19 @@ class _MainNavigationScreen extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isCoach = _player?.rol == "coach";
+
+    final List<Widget> screens = [
+      const HomeScreen(),
+      const StatsScreen(),
+      const TrainingScreen(),
+      _player == null
+            ? const Center(child: CircularProgressIndicator())
+            : PlayerProfileScreen(player: _player!, isTrainer: isCoach),
+    ];
+
     return Scaffold(
-      body: _screens[_selectedIndex],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final uid = FirebaseAuth.instance.currentUser?.uid;
-          if (uid == null) return;
-
-          final doc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
-          if (!doc.exists) return;
-
-          final player = Player.fromFirestore(doc);
-          final isCoach = player.rol == "coach" ? true : false;
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PlayerProfileScreen(
-                player: player,
-                isTrainer: isCoach,
-              ),
-            ),
-          );
-        },
-        backgroundColor: Colors.red,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.person, color: Colors.white),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: screens[_selectedIndex],
       bottomNavigationBar: BottomAppBar(
         color: Colors.grey[900],
         shape: const CircularNotchedRectangle(),
@@ -86,6 +84,13 @@ class _MainNavigationScreen extends State<MainNavigationScreen> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _onItemTapped(3),
+        backgroundColor: Colors.red,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.person, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
