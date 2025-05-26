@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:volley_tracker/views/dashboard_screen.dart';
+import 'package:volley_tracker/views/home_screen.dart';
 import 'package:volley_tracker/views/register_success_screen.dart';
 import 'package:volley_tracker/widgets/AuthGate.dart';
 import 'package:volley_tracker/widgets/SGTheme.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       home: AuthGate(),
       routes: {
         '/register_success': (context) => const RegisterSuccessScreen(),
-        '/home': (context) => const DashboardScreen(),
+        '/home': (context) => const MainNavigationScreen(),
       },
     );
   }

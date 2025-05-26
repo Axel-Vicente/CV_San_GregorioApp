@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:volley_tracker/views/training_screen.dart';
+import 'package:volley_tracker/views/stats_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -71,16 +73,4 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) => const Center(child: Text("Home"));
-}
-
-class StatsScreen extends StatelessWidget {
-  const StatsScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const Center(child: Text("Estadísticas"));
-}
-
-class TrainingScreen extends StatelessWidget {
-  const TrainingScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const Center(child: Text("Entrenos"));
 }
