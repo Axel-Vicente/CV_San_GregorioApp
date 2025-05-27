@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:volley_tracker/models/player.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class PlayerProfileScreen extends StatelessWidget {
   final Player player;
@@ -56,32 +57,58 @@ class PlayerProfileScreen extends StatelessWidget {
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  const SizedBox(height: 16),
-                  InfoRow(label: "Edad", value: "{player}"),
-                  InfoRow(label: "Altura", value: "{player.altura}"),
-                  InfoRow(label: "Posición", value: "player.posicion"),
-                  const SizedBox(height: 20),
-                  if (isTrainer)
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/editarPerfil',
-                          arguments: player,
-                        );
-                      },
-                      icon: const Icon(Icons.edit),
-                      label: const Text("Editar Perfil"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                      ),
-                    ),
+              child: Animate(
+                effects: [
+                  FadeEffect(duration: 400.ms),
+                  SlideEffect(
+                    begin: const Offset(0, 0.1),
+                    end: Offset.zero,
+                    duration: 400.ms,
+                    curve: Curves.easeOut,
+                  ),
                 ],
+                child: Card(
+                  color: Colors.grey[800],
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  elevation: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InfoRow(label: "Edad", value: "{player.edad}"),
+                        const Divider(color: Colors.grey),
+                        InfoRow(label: "Altura", value: "{player.altura} cm"),
+                        const Divider(color: Colors.grey),
+                        InfoRow(label: "Posición", value: "player.posicion"),
+                        if (isTrainer) ...[
+                          const SizedBox(height: 20),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  '/editarPerfil',
+                                  arguments: player,
+                                );
+                              },
+                              icon: const Icon(Icons.edit),
+                              label: const Text("Editar Perfil"),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
+
         ],
       ),
     );
