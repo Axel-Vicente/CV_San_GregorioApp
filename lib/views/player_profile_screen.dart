@@ -76,11 +76,18 @@ class PlayerProfileScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        InfoRow(label: "Edad", value: "{player.edad}"),
+                        InfoRow(label: "Nombre", value: "${player.nombre}"),
                         const Divider(color: Colors.grey),
-                        InfoRow(label: "Altura", value: "{player.altura} cm"),
+                        InfoRow(label: "Edad", value: "${player.edad}"),
                         const Divider(color: Colors.grey),
-                        InfoRow(label: "Posición", value: "player.posicion"),
+                        InfoRow(label: "Altura", value: "${player.altura} cm"),
+                        const Divider(color: Colors.grey),
+                        InfoRow(label: "Dorsal", value: "${player.numeroDorsal}"),
+                        const Divider(color: Colors.grey),
+                        InfoRow(label: "Posición", value: "${player.posicion}"),
+                        const Divider(color: Colors.grey),
+                        InfoRow(label: "Email", value: "${player.email}"),
+                        const Divider(color: Colors.grey),
                         if (isTrainer) ...[
                           const SizedBox(height: 20),
                           Align(

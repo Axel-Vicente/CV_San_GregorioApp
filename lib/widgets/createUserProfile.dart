@@ -13,6 +13,13 @@ Future<void> createUserProfile(String name) async {
       'name': name,
       'role': 'player',
       'createdAt': FieldValue.serverTimestamp(),
+
+      // Campos vacíos por defecto
+      'posicion': '',
+      'edad': 0,
+      'altura': 0,
+      'imagenPerfil': '',
+      'numeroDorsal': 0,
     });
   }
 }
