@@ -25,7 +25,7 @@ class RegisterSuccessScreen extends StatelessWidget {
                   Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
                 },
                 child: const Text('Iniciar sesión'),
-              )
+              ),
             ],
           ),
         ),

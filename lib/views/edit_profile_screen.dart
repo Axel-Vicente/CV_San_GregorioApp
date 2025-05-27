@@ -24,9 +24,13 @@ class _EditarPerfilScreenState extends State<EditProfileScreen> {
     super.initState();
     nombreController = TextEditingController(text: widget.player.nombre);
     edadController = TextEditingController(text: widget.player.edad.toString());
-    alturaController = TextEditingController(text: widget.player.altura.toString());
+    alturaController = TextEditingController(
+      text: widget.player.altura.toString(),
+    );
     posicionController = TextEditingController(text: widget.player.posicion);
-    dorsalController = TextEditingController(text: widget.player.numeroDorsal.toString());
+    dorsalController = TextEditingController(
+      text: widget.player.numeroDorsal.toString(),
+    );
     emailController = TextEditingController(text: widget.player.email);
   }
 
@@ -42,7 +46,9 @@ class _EditarPerfilScreenState extends State<EditProfileScreen> {
   }
 
   void _guardarCambios() async {
-    final docRef = FirebaseFirestore.instance.collection('users').doc(widget.player.id);
+    final docRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.player.id);
 
     await docRef.update({
       'nombre': nombreController.text,
@@ -80,14 +86,18 @@ class _EditarPerfilScreenState extends State<EditProfileScreen> {
               onPressed: _guardarCambios,
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
               child: const Text("Guardar"),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, {bool isNumber = false}) {
+  Widget _buildTextField(
+    String label,
+    TextEditingController controller, {
+    bool isNumber = false,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: TextField(

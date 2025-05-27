@@ -5,7 +5,9 @@ Future<void> createUserProfile(String name) async {
   final user = FirebaseAuth.instance.currentUser;
 
   if (user != null) {
-    final userDoc = FirebaseFirestore.instance.collection('users').doc(user.uid);
+    final userDoc = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid);
 
     await userDoc.set({
       'uid': user.uid,

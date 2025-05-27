@@ -6,11 +6,11 @@ final ThemeData appTheme = ThemeData(
   textTheme: GoogleFonts.interTextTheme(),
   colorScheme: ColorScheme.dark(
     primary: Colors.grey[800]!, // color para widgets
-    secondary: Colors.red,      // rojo como color de acento
-    background: Colors.black,   // fondo de pantallas
-    surface: const Color.fromARGB(255, 63, 63, 63),  // tarjetas, inputs, etc.
-    onPrimary: Colors.white,    // texto sobre primary
-    onSecondary: Colors.white,  // texto sobre secondary
+    secondary: Colors.red, // rojo como color de acento
+    background: Colors.black, // fondo de pantallas
+    surface: const Color.fromARGB(255, 63, 63, 63), // tarjetas, inputs, etc.
+    onPrimary: Colors.white, // texto sobre primary
+    onSecondary: Colors.white, // texto sobre secondary
     onSurface: Colors.white,
     error: Colors.redAccent,
     onError: Colors.white,

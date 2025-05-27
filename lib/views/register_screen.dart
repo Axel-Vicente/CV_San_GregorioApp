@@ -27,7 +27,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   String? validatePassword(String? value) {
-    if (value == null || value.length < 6) return 'Contraseña mínima de 6 caracteres';
+    if (value == null || value.length < 6)
+      return 'Contraseña mínima de 6 caracteres';
     return null;
   }
 
@@ -42,7 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         passwordController.text.trim(),
       );
       await createUserProfile(nameController.text.trim());
-      
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const RegisterSuccessScreen()),
@@ -50,13 +51,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } catch (e, stackTrace) {
       print('🧨 Error inesperado: $e');
       print('📄 Stacktrace:\n$stackTrace');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error inesperado")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Error inesperado")));
     } finally {
-        setState(() => _loading = false);
-      }
+      setState(() => _loading = false);
     }
+  }
 
   @override
   Widget build(BuildContext context) {

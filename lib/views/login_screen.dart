@@ -37,16 +37,15 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   String? validateEmail(String? value) {
-      const pattern =
-          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-      final regex = RegExp(pattern);
+    const pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+    final regex = RegExp(pattern);
 
-      if (value == null || value.isEmpty) {
-        return 'El correo es obligatorio';
-      } else if (!regex.hasMatch(value)) {
-        return 'Correo no válido';
-      }
-      return null;
+    if (value == null || value.isEmpty) {
+      return 'El correo es obligatorio';
+    } else if (!regex.hasMatch(value)) {
+      return 'Correo no válido';
+    }
+    return null;
   }
 
   void _login() async {
@@ -101,19 +100,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passwordController,
                     obscureText: true,
                     decoration: const InputDecoration(labelText: 'Contraseña'),
-                    validator: (value) =>
-                        value != null && value.length < 6
-                            ? 'Mínimo 6 caracteres'
-                            : null,
+                    validator: (value) => value != null && value.length < 6
+                        ? 'Mínimo 6 caracteres'
+                        : null,
                   ),
                   const SizedBox(height: 20),
 
                   // Error
                   if (_error != null)
-                    Text(
-                      _error!,
-                      style: const TextStyle(color: Colors.red),
-                    ),
+                    Text(_error!, style: const TextStyle(color: Colors.red)),
                   const SizedBox(height: 16),
 
                   // Botón login o cargando
@@ -134,7 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegisterScreen()),
+                          builder: (context) => const RegisterScreen(),
+                        ),
                       );
                     },
                     child: const Text("¿No tienes cuenta? Regístrate aquí"),
