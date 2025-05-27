@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:volley_tracker/models/player.dart';
+import 'package:volley_tracker/views/edit_profile_screen.dart';
 import 'package:volley_tracker/views/home_screen.dart';
 import 'package:volley_tracker/views/register_success_screen.dart';
 import 'package:volley_tracker/widgets/AuthGate.dart';
@@ -27,6 +29,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/register_success': (context) => const RegisterSuccessScreen(),
         '/home': (context) => const MainNavigationScreen(),
+        '/editProfile': (context) {
+          final player = ModalRoute.of(context)!.settings.arguments as Player;
+          return EditProfileScreen(player: player);
+        },
       },
     );
   }

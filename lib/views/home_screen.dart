@@ -17,7 +17,7 @@ class _MainNavigationScreen extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
   Player? _player;
 
-@override
+  @override
   void initState() {
     super.initState();
     _loadPlayer();
@@ -27,7 +27,10 @@ class _MainNavigationScreen extends State<MainNavigationScreen> {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
 
-    final doc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get();
     if (!doc.exists) return;
 
     setState(() {
@@ -48,8 +51,8 @@ class _MainNavigationScreen extends State<MainNavigationScreen> {
       const StatsScreen(),
       const TrainingScreen(),
       _player == null
-            ? const Center(child: CircularProgressIndicator())
-            : PlayerProfileScreen(player: _player!, isTrainer: isCoach),
+          ? const Center(child: CircularProgressIndicator())
+          : PlayerProfileScreen(playerId: _player!.id, isTrainer: isCoach),
     ];
 
     return Scaffold(
@@ -64,16 +67,25 @@ class _MainNavigationScreen extends State<MainNavigationScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Icon(Icons.home_rounded, color: _selectedIndex == 0 ? Colors.red : Colors.white70),
+                icon: Icon(
+                  Icons.home_rounded,
+                  color: _selectedIndex == 0 ? Colors.red : Colors.white70,
+                ),
                 onPressed: () => _onItemTapped(0),
               ),
               IconButton(
-                icon: Icon(Icons.bar_chart_rounded, color: _selectedIndex == 1 ? Colors.red : Colors.white70),
+                icon: Icon(
+                  Icons.bar_chart_rounded,
+                  color: _selectedIndex == 1 ? Colors.red : Colors.white70,
+                ),
                 onPressed: () => _onItemTapped(1),
               ),
               const SizedBox(width: 48), // espacio para el FAB
               IconButton(
-                icon: Icon(Icons.sports_volleyball_rounded, color: _selectedIndex == 2 ? Colors.red : Colors.white70),
+                icon: Icon(
+                  Icons.sports_volleyball_rounded,
+                  color: _selectedIndex == 2 ? Colors.red : Colors.white70,
+                ),
                 onPressed: () => _onItemTapped(2),
               ),
               IconButton(
